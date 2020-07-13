@@ -41,7 +41,7 @@ public struct LookupTable <T: BinaryFloatingPoint> {
     /// - Returns:
     /// The retrieved or computed value of `f(x)`.
     ///
-    public func f(x: T) -> T {
+    public func f(_ x: T) -> T {
         retrieveF(for: x)
     }
 
