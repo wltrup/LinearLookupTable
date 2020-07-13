@@ -3,13 +3,13 @@ import XCTest
 
 final class TrigTableTests: XCTestCase {
 
-    func test_sin_table() {
-        let trigTable = TrigTable<Float>(dxMin: 0.0001, dxMax: 0.001, df: 0.00001)!
+    func test_sin_table_from_minus3pi_to_3pi() {
+        let trigTable = TrigTable<Float>(dxMin: 0.00001, dxMax: 0.001, df: 0.000001)!
         let n = 10_000
-        let dx = 0.5 * Float.pi / Float(n-1)
+        let dx = 6.0 * Float.pi / Float(n-1)
         var `var`: Float = .zero
         for k in 0 ..< n {
-            let x = Float(k) * dx
+            let x = -3.0 * Float.pi + Float(k) * dx
             let actualSine = Darwin.sin(x)
             let  tableSine = trigTable.sin(x)
             let diff = actualSine - tableSine
@@ -20,13 +20,13 @@ final class TrigTableTests: XCTestCase {
         XCTAssert(std <= trigTable.df)
     }
 
-    func test_cos_table() {
-        let trigTable = TrigTable<Float>(dxMin: 0.0001, dxMax: 0.001, df: 0.00001)!
+    func test_cos_table_from_minus3pi_to_3pi() {
+        let trigTable = TrigTable<Float>(dxMin: 0.00001, dxMax: 0.001, df: 0.000001)!
         let n = 10_000
-        let dx = 0.5 * Float.pi / Float(n-1)
+        let dx = 6.0 * Float.pi / Float(n-1)
         var `var`: Float = .zero
         for k in 0 ..< n {
-            let x = Float(k) * dx
+            let x = -3.0 * Float.pi + Float(k) * dx
             let actualSine = Darwin.cos(x)
             let  tableSine = trigTable.cos(x)
             let diff = actualSine - tableSine
@@ -38,8 +38,8 @@ final class TrigTableTests: XCTestCase {
     }
 
     static var allTests = [
-        ("test_sin_table", test_sin_table),
-        ("test_cos_table", test_cos_table)
+        ("test_sin_table_from_minus3pi_to_3pi", test_sin_table_from_minus3pi_to_3pi),
+        ("test_cos_table_from_minus3pi_to_3pi", test_cos_table_from_minus3pi_to_3pi)
     ]
 
 }

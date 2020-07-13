@@ -7,7 +7,7 @@
 
 ## What
 
-**LookupTable** is a Swift Package Manager package for iOS/tvOS (10.0 and above), watchOS (4.0 and above), and macOS (10.14 and above), under Swift 5.0 and above,  that efficiently implements a generic *look-up table*: given a function `f(x)` and its derivative `f'(x)`, a table is built that stores values of `x` and `f(x)` at dynamically determined points in the interval `[a,b]` where the function values are desired. The derivative is necessary to dynamically determine  where to sample `f(x)` for maximum efficiency and accuracy. 
+**LookupTable** is a Swift Package Manager package for iOS/tvOS (10.0 and above), watchOS (4.0 and above), and macOS (10.14 and above), under Swift 5.0 and above,  that efficiently implements a generic (in the Swift sense) linearly-interpolated and dynamically-sampled look-up table: given a function `f(x)` and its derivative `f'(x)`, a table is built that stores values of `x` and `f(x)` at specific points in some interval `[a,b]` provided by the client code. The derivative is necessary to dynamically determine  where to sample `f(x)` for maximum efficiency and accuracy.
 
 ```swift
 public struct LookupTable <T: BinaryFloatingPoint> {
@@ -92,7 +92,7 @@ public struct LookupTable <T: BinaryFloatingPoint> {
 }
 ```
 
-Another type provided by this package is `TrigTable`, which implements look-up tables for both `sin(x)` and `cos(x)`:
+As a useful example in itself, the package also provides the `TrigTable` type, which implements look-up tables for both `sin(x)` and `cos(x)`:
 
 ```swift
 public struct TrigTable <T: BinaryFloatingPoint> {
@@ -172,6 +172,8 @@ public struct TrigTable <T: BinaryFloatingPoint> {
 
 }
 ```
+
+Lastly, for a mathematical description of the details involved in building these tables, you may want to take a look at [Designing and building efficient look-up tables](./lookup_tables.pdf). 
 
 ## Installation
 
