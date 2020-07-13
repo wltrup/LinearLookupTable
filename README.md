@@ -7,7 +7,7 @@
 
 ## What
 
-**LookupTable** is a Swift Package Manager package for iOS/tvOS (10.0 and above), watchOS (4.0 and above), and macOS (10.14 and above), under Swift 5.0 and above,  that efficiently implements a generic *look-up table*: given a function *f(x)* and its derivative *f'(x)*, a table is built that stores values of *x* and *f(x)* at dynamically determined points in the interval *[a,b]* where the function values are desired. The derivative is necessary to dynamically determine  where to sample *f(x)* for maximum efficiency and accuracy. 
+**LookupTable** is a Swift Package Manager package for iOS/tvOS (10.0 and above), watchOS (4.0 and above), and macOS (10.14 and above), under Swift 5.0 and above,  that efficiently implements a generic *look-up table*: given a function `f(x)` and its derivative `f'(x)`, a table is built that stores values of `x` and `f(x)` at dynamically determined points in the interval `[a,b]` where the function values are desired. The derivative is necessary to dynamically determine  where to sample `f(x)` for maximum efficiency and accuracy. 
 
 ```swift
 public struct LookupTable <T: BinaryFloatingPoint> {
@@ -47,7 +47,7 @@ public struct LookupTable <T: BinaryFloatingPoint> {
     /// - Returns:
     /// The retrieved or computed value of `f(x)`.
     ///
-    public func f(x: T) -> T
+    public func f(_ x: T) -> T
 
     /// Initialises a look-up table.
     ///
@@ -88,6 +88,87 @@ public struct LookupTable <T: BinaryFloatingPoint> {
         f: @escaping (T) -> T,
         fp: @escaping (T) -> T
     )
+
+}
+```
+
+Another type provided by this package is `TrigTable`, which implements look-up tables for both `sin(x)` and `cos(x)`:
+
+```swift
+public struct TrigTable <T: BinaryFloatingPoint> {
+
+    /// The lower end of the canonical interval `[0, pi/2]` for which to build the look-up table.
+    public let a: T = .zero
+
+    /// The upper end of the canonical interval `[0, pi/2]` for which to build the look-up table.
+    public let b: T = 0.5 * .pi
+
+    /// The smallest acceptable value of the increment in the independent value `x`.
+    /// Note that `dxMin` must satisfy the conditions `dxMax > dxMin > 0`.
+    public let dxMin: T
+
+    /// The largest acceptable value of the increment in the independent value `x`.
+    /// Note that `dxMax` must satisfy the conditions `dxMax > dxMin > 0`.
+    public let dxMax: T
+
+    /// The desired precision for the values of `sin(x)` and `cos(x)`.
+    /// Note that `df` must satisfy the condition `df > 0`.
+    public let df: T
+
+    /// Convenience value.
+    public let piOver2 = 0.5 * T.pi
+
+    /// Convenience value.
+    public let pi = T.pi
+
+    /// Convenience value.
+    public let threePiOver2 = 1.5 * T.pi
+
+    /// Convenience value.
+    public let twoPi = 2.0 * T.pi
+
+    /// The number of values stored in the table.
+    public var size: Int { sinTable.size }
+
+    /// Returns the value of `sin(x)` by retrieving it from the table, if it exists there,
+    /// or computes it by interpolating between the two values in the table that bracket
+    /// the argument `x`.
+    ///
+    /// - Parameter x:
+    /// The value for which to retrieve or compute `sin(x)`.
+    ///
+    /// - Returns:
+    /// The retrieved or computed value of `sin(x)`.
+    ///
+    public func sin(_ x: T) -> T
+
+    /// Returns the value of `cos(x)` using the identity `cos(x) = sin(x + pi/2)`.
+    ///
+    /// - Parameter x:
+    /// The value for which to retrieve or compute `cos(x)`.
+    ///
+    /// - Returns:
+    /// The retrieved or computed value of `cos(x)`.
+    ///
+    public func cos(_ x: T) -> T
+
+    /// Initialises a look-up table for `sin(x)` and `cos(x)`.
+    ///
+    /// - Parameters:
+    ///
+    ///   - dxMin:
+    ///   The smallest acceptable value of the increment in the independent value `x`.
+    ///   Note that `dxMin` must satisfy the conditions `dxMax > dxMin > 0`.
+    ///
+    ///   - dxMax:
+    ///   The largest acceptable value of the increment in the independent value `x`.
+    ///   Note that `dxMax` must satisfy the conditions `dxMax > dxMin > 0`.
+    ///
+    ///   - df:
+    ///   The desired precision for the values of `sin(x)` and `cos(x)`.
+    ///   Note that `df` must satisfy the condition `df > 0`.
+    ///
+    public init?(dxMin: T, dxMax: T, df: T)
 
 }
 ```
