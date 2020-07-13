@@ -128,7 +128,7 @@ public struct TrigTable <T: BinaryFloatingPoint> {
     public let twoPi = 2.0 * T.pi
 
     /// The number of values stored in the table.
-    public var size: Int { sinTable.size }
+    public var size: Int
 
     /// Returns the value of `sin(x)` by retrieving it from the table, if it exists there,
     /// or computes it by interpolating between the two values in the table that bracket
