@@ -9,6 +9,10 @@
 
 **LinearLookupTable** is a Swift Package Manager package for iOS/tvOS (10.0 and above), watchOS (4.0 and above), and macOS (10.14 and above), under Swift 5.0 and above,  that efficiently implements a generic (in the Swift sense) *linearly*-interpolated and dynamically-sampled look-up table: given a function `f(x)` and its derivative `f'(x)`, a table is built that stores values of `x` and `f(x)` at specific points in some interval `[a,b]` provided by the client code. The derivative is necessary to dynamically determine  where to sample `f(x)` for maximum efficiency and accuracy.
 
+For a *cubic*-interpolated version of this package, head to [CubicLookupTable](https://github.com/wltrup/CubicLookupTable).
+
+Which one should you choose to use? That depends entirely on your needs. The main advantage of a linearly-interpolated table is that it's cheaper, both computationally and memory-wise, than a cubic-interpolated table but it's also less accurate for the same table size. Also, linear interpolation does not preserve the continuity of the interpolated function's derivative. If that's important to you, you should use a cubic-interpolated table.
+
 ```swift
 public struct LinearLookupTable <T: BinaryFloatingPoint> {
 
