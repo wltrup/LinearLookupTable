@@ -3,7 +3,7 @@ import Foundation
 /// Builds a look-up table for `sin(x)` and `cos(x)`, in the real line,
 /// using *dynamic sampling* and *linear* interpolation.
 
-public struct TrigTable <T: BinaryFloatingPoint> {
+public struct LinearTrigTable <T: BinaryFloatingPoint> {
 
     /// The lower end of the canonical interval `[0, pi/2]` for which to build the look-up table.
     public let a: T = .zero
@@ -102,7 +102,7 @@ public struct TrigTable <T: BinaryFloatingPoint> {
         self.dxMax = dxMax
         self.df = df
 
-        self.sinTable = LookupTable<T>(
+        self.sinTable = LinearLookupTable<T>(
             a: .zero,
             b: 0.5 * .pi,
             dxMin: dxMin,
@@ -114,6 +114,6 @@ public struct TrigTable <T: BinaryFloatingPoint> {
 
     }
 
-    private let sinTable: LookupTable<T>
+    private let sinTable: LinearLookupTable<T>
 
 }

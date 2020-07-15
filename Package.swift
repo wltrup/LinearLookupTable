@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "LookupTable",
+    name: "LinearLookupTable",
     platforms: [
         .iOS(.v10),
         .watchOS(.v4),
@@ -12,8 +12,8 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "LookupTable",
-            targets: ["LookupTable"]
+            name: "LinearLookupTable",
+            targets: ["LinearLookupTable"]
         ),
     ],
     dependencies: [
@@ -21,15 +21,15 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "LookupTable",
+            name: "LinearLookupTable",
             dependencies: [
                 "RandomAccessCollectionBinarySearch",
             ]
         ),
         .testTarget(
-            name: "LookupTableTests",
+            name: "LinearLookupTableTests",
             dependencies: [
-                "LookupTable",
+                "LinearLookupTable",
             ]
         ),
     ]

@@ -1,10 +1,10 @@
 import XCTest
-@testable import LookupTable
+@testable import LinearLookupTable
 
-final class TrigTableTests: XCTestCase {
+final class LinearTrigTableTests: XCTestCase {
 
     func test_sin_table_from_minus3pi_to_3pi() {
-        let trigTable = TrigTable<Float>(dxMin: 0.00001, dxMax: 0.001, df: 0.000001)!
+        let trigTable = LinearTrigTable<Float>(dxMin: 0.00001, dxMax: 0.001, df: 0.000001)!
         let n = 10_000
         let dx = 6.0 * Float.pi / Float(n-1)
         var `var`: Float = .zero
@@ -21,7 +21,7 @@ final class TrigTableTests: XCTestCase {
     }
 
     func test_cos_table_from_minus3pi_to_3pi() {
-        let trigTable = TrigTable<Float>(dxMin: 0.00001, dxMax: 0.001, df: 0.000001)!
+        let trigTable = LinearTrigTable<Float>(dxMin: 0.00001, dxMax: 0.001, df: 0.000001)!
         let n = 10_000
         let dx = 6.0 * Float.pi / Float(n-1)
         var `var`: Float = .zero

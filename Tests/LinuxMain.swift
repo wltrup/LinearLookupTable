@@ -1,7 +1,7 @@
 import XCTest
 
-import LookupTableTests
+import LinearLookupTableTests
 
 var tests = [XCTestCaseEntry]()
-tests += LookupTableTests.allTests()
+tests += LinearLookupTableTests.allTests()
 XCTMain(tests)

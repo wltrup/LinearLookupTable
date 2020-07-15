@@ -4,7 +4,7 @@ import RandomAccessCollectionBinarySearch
 /// Builds a look-up table for a given function `f(x)` in the interval `a ≤ x ≤ b`,
 /// using *dynamic sampling* and *linear* interpolation.
 
-public struct LookupTable <T: BinaryFloatingPoint> {
+public struct LinearLookupTable <T: BinaryFloatingPoint> {
 
     /// The lower end of the closed interval `[a,b]` for which to build the look-up table.
     /// Note that `a` and `b` must satisfy the condition `a < b`.
@@ -118,7 +118,7 @@ public struct LookupTable <T: BinaryFloatingPoint> {
 
 // MARK: - Private API
 
-extension LookupTable {
+extension LinearLookupTable {
 
     private mutating func buildTheTable() {
 
